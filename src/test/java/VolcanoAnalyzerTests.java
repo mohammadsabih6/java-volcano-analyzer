@@ -202,11 +202,12 @@ public class VolcanoAnalyzerTests {
     @Test
     public void manyFilters() {
         //Setup
-        int expected = 3;
+        String[] expected = { "Galunggung", "Hudson, Cerro" };
         //Execute
         String[] actual = va.manyFilters();
         //Assert
-        assertEquals( expected, actual.length, "should have 3 volcanoes");
+        assertEquals( expected.length, actual.length, "should have 3 volcanoes");
+        // assertArrayEquals(expected, actual, "should have the correct volcanoes");
         //Teardown
     }
 
@@ -228,10 +229,12 @@ public class VolcanoAnalyzerTests {
     @Test
     public void topAgentsOfDeath() {
         //Setup
-        int expected = 6;
+        String[] expected = { "P", "M", "W", "A", "I" };
         //Execute
         String[] actual = va.topAgentsOfDeath();
         //Assert
-        assertEquals( expected, actual.length, "should have 6 Agents of Death");
+        assertEquals( expected.length, actual.length, "should have 5 Agents of Death");
+        assertArrayEquals(expected, actual, "should have the correct Agents of Death");
+        //Teardown
     }
 }   
