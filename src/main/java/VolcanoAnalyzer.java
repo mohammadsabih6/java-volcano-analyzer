@@ -26,7 +26,7 @@ public class VolcanoAnalyzer {
     public Integer numbVolcanoes(){
         return volcanos.size();
     }
-
+    //All test Methods
     public List<Volcano> eruptedInEighties() {
         return volcanos.stream().filter(i -> i.getYear()>=1980 && i.getYear()<1990).collect(Collectors.toList());
     }
