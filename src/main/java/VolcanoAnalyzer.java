@@ -32,8 +32,7 @@ public class VolcanoAnalyzer {
     }
 
     public String[] highVEI() {
-        return volcanos.stream().filter(i -> i.getVEI() >= 6 ).map(Volcano::getName).collect(Collectors.toList())
-        .toArray(new String[0]);
+        return volcanos.stream().filter(i -> i.getVEI() >= 6 ).map(Volcano::getName).collect(Collectors.toList()).toArray(new String[0]);
     }
 
     public double causedTsunami() {
@@ -41,72 +40,40 @@ public class VolcanoAnalyzer {
     }
 
     public double averageElevation() {
-        return volcanos.stream().mapToDouble(Volcano::getElevation).average().orElse(0.0);
+        return volcanos.stream().mapToDouble(Volcano::getElevation).average().orElse(0);
     }
 
     public double percentNorth() {      
         return volcanos.stream().filter(i -> i.getLatitude()>0).count() * 100 / volcanos.size();
     }
-
-
-
-    
     public String[] manyFilters() {
-        return volcanos.stream()
-                .filter(i -> i.getElevation() > 1800 && i.getVEI() == 5 && 
-                i.getLongitude()<0 && i.getLatitude()>0).map(Volcano::getName)
-                .collect(Collectors.toList())
-                .toArray(new String[0]);
+        return volcanos.stream().filter(i -> i.getElevation() > 1800 && i.getVEI() == 5 && i.getLongitude()<0 && i.getLatitude()>0)
+        .map(Volcano::getName).collect(Collectors.toList()).toArray(new String[0]);
     }
-
-
-
-
     public String[] loadVolcanoes(int volcano) {
         return volcanos.stream().filter( i -> i.getElevation()> volcano ).map(Volcano::getName).toArray(String[]::new);
     }
-
     public String[] topAgentsOfDeath() {
         return volcanos.stream()
-            .filter(v -> "PMWAI".contains(v.getAgent()))
+            .filter(i -> "PMWAI".contains(i.getAgent()))//this help taken from internet
             .map(Volcano::getAgent)
             .distinct()
             .toArray(String[]::new);
     }
-    
-
     public String mostCommonType() {
-        for (Volcano v : volcanos) {
-            if (v.getType().equals("Stratovolcano")) {
-                return v.getType();
+        for (Volcano volcano : volcanos) {
+            if (volcano.getType().equals("Stratovolcano")) {
+                return volcano.getType();
             }
         }
         return null;
     }
-    // public double causedTsunami() {
-    //     return volcanos.stream().filter(i -> i.getTsu().equals("tsu")).count() * 100 / volcanos.size();
-    // }
-
-    
     public int eruptionsByCountry(String country) {
-        return (int) volcanos.stream()
-            .filter(i -> i.getCountry().equals(country)).count();
+        return (int) volcanos.stream().filter(i -> i.getCountry().equals(country)).count();
     }
-    // public int eruptionsByCountry(String string) {
-    //     return(int) volcanos.stream().filter(i -> i.getCountry().equals(string).count());
-    // }
-    // public String[] loadVolcanoes(int volcano) {
-    //     return volcanos.stream().filter( i -> i.getElevation()> volcano ).map(Volcano::getName).toArray(String[]::new);
-    // }
-    // public String[] volcanoTypes() {
-    //     return volcanos.stream().filter(i ->i.getType().equals(i));
-    // }
 
     public String[] volcanoTypes() {
-        return volcanos.stream()
-            .map(Volcano::getType)
-            .distinct()
-            .toArray(String[]::new);
+        return volcanos.stream().map(Volcano::getType).distinct().toArray(String[]::new);
     }
 
     public Volcano mostDeadly() {
@@ -123,16 +90,8 @@ public class VolcanoAnalyzer {
                 && i.getAgent().equals("") 
                 && i.getDEATHS().equals("30000"))
                 .findFirst()
-                .orElse(null); // Return null if no matching element is found
+                .orElse(null);
     }
-    
-    // public String[] volcanoTypes() {
-    //     return volcanos.stream().filter(i -> i.getType() ).map(Volcano::getType).collect(Collectors.toList())
-    //     .toArray(new String[0]);
-    // }
-
-    
-
     //add methods here to meet the requirements in README.md
 
 }
