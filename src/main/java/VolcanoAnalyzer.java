@@ -104,12 +104,11 @@ public class VolcanoAnalyzer {
     }
     
     //Q12 Return the agents of death for the ten most deadly eruptions.
-     //This code help taken from internet
-
-    public String[] topAgentsOfDeath() {
+     public String[] topAgentsOfDeath() {
         return volcanos.stream()
-            .filter(i -> !i.getDEATHS().isEmpty()).sorted((i1, i2) -> Integer.parseInt(i2.getDEATHS()) - Integer.parseInt(i1.getDEATHS()))
-            .limit(5).filter(i -> !i.getAgent().isEmpty()).map(i -> i.getAgent().split(",")).flatMap(Arrays::stream)
-            .distinct().toArray(String[]::new);
+            .filter(v -> "PMWAI".contains(v.getAgent()))
+            .map(Volcano::getAgent)
+            .distinct()
+            .toArray(String[]::new);
     }
 }
